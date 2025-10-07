@@ -55,7 +55,8 @@ class MainActivity : ComponentActivity() {
 fun InterVallues(
     orderSum: String,
     onOrderSumChange: (String) -> Unit,
-
+    dishNumber: String,
+    onDishNumberChange: (String) -> Unit
 ) {
     Row(
         modifier = Modifier
@@ -74,6 +75,22 @@ fun InterVallues(
         )
     }
 
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(5.dp),
+        horizontalArrangement = Arrangement.SpaceAround,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text("Количество блюд:")
+
+        OutlinedTextField(
+            value = dishNumber,
+            onValueChange = onDishNumberChange,
+            label = { Text("Введите количество") },
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+        )
+    }
 }
 
 
@@ -81,7 +98,7 @@ fun InterVallues(
 @Composable
 fun AllScreen(modifier: Modifier = Modifier) {
     var orderSum by remember { mutableStateOf("") }
-
+    var dishNumber by remember { mutableStateOf("") }
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
@@ -90,7 +107,8 @@ fun AllScreen(modifier: Modifier = Modifier) {
         InterVallues(
             orderSum = orderSum,
             onOrderSumChange = { orderSum = it },
-
+            dishNumber = dishNumber,
+            onDishNumberChange = { dishNumber = it }
         )
     }
 }
