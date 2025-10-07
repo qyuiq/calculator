@@ -178,7 +178,6 @@ fun AllScreen(modifier: Modifier = Modifier) {
         }
 
         DiscountSelector(selectedDiscount = selectedDiscount)
-        Spacer(modifier = Modifier.height(0.dp))
     }
 }
 
