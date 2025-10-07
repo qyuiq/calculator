@@ -93,12 +93,22 @@ fun InterVallues(
     }
 }
 
-
+@Composable
+fun TipSlider(sliderPosition: Float, onPositionChange: (Float) -> Unit) {
+    Slider(
+        modifier = Modifier.padding(10.dp),
+        valueRange = 0f..25f,
+        value = sliderPosition,
+        onValueChange = onPositionChange
+    )
+}
 
 @Composable
 fun AllScreen(modifier: Modifier = Modifier) {
     var orderSum by remember { mutableStateOf("") }
     var dishNumber by remember { mutableStateOf("") }
+    var sliderPosition by remember { mutableFloatStateOf(0f) }
+
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
@@ -110,6 +120,31 @@ fun AllScreen(modifier: Modifier = Modifier) {
             dishNumber = dishNumber,
             onDishNumberChange = { dishNumber = it }
         )
+
+
+        Row(
+            horizontalArrangement = Arrangement.Start,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text(
+                text = "Чаевые:",
+                style = MaterialTheme.typography.headlineMedium,
+                fontSize = 20.sp,
+            )
+        }
+        TipSlider(
+            sliderPosition = sliderPosition,
+            onPositionChange = { sliderPosition = it }
+        )
+        Row(
+            horizontalArrangement = Arrangement.SpaceBetween,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(10.dp, 0.dp)
+        ) {
+            Text("0", style = MaterialTheme.typography.headlineMedium)
+            Text("25", style = MaterialTheme.typography.headlineMedium)
+        }
     }
 }
 
